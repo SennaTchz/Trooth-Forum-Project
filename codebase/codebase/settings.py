@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--i%xys=rio8#r(lugwgbx6klhha&g+!3e%u!8%x)^(o)yf$$#m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://trooth-forum-project.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['trooth-forum-project.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
