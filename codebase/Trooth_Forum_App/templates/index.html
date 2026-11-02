@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: 'Merriweather', serif;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-image: url('{% static "bg.svg" %}');
+            background-color: #050505;
+            color: #A6A6A6;
+        }
+
+        #fatherContainer header nav a {
+            font-size: 16px;
+        }
+
+        #fatherContainer header nav a:hover {
+            opacity: 90%;
+        }
+
+        #fatherContainer .userContainer nav a {
+            font-size: 8px;
+            color: #6861e2;
+        }
+
+        #mainContainer .secondaryItem {
+            display: flex;
+        }
+
+        #mainContainer #recentPosts div section {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #3b3b3b;
+            gap: 8px;
+        }
+
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid #940707;
+            white-space: nowrap;
+            margin: 0;
+            animation:
+                typing 3.5s steps(30, end) forwards,
+                blink-cursor 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-cursor {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #292929;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+        }
+    </style>
+    <script>
+        function toggleReplyForm(postId) {
+            const formWrapper = document.getElementById(`reply-form-wrapper-${postId}`);
+            if (formWrapper) {
+                formWrapper.classList.toggle('hidden');
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-cover bg-center min-h-screen relative max-w-[1000px] mx-auto">
+    <header class="p-[30px]">
+        <div class="w-full">
+            <section class="flex flex-col items-center gap-[15px] md:flex-row justify-between">
+                <a href="/" class="text-sm font-extrabold">Trooth Underground Forum</a>
+                <nav class="flex items-center gap-[20px]">
+                    <a href="/news" class="text-sm">[Notícias]</a>
+                    <a href="/ban" class="text-sm">[Banidos]</a>
+                </nav>
+            </section>
+        </div>
+    </header>
+
+    <div id="mainContainer" class="flex p-[15px] flex-col md:grid grid-cols-3 gap-[30px] sm:p-[30px]">
+        <!-- Box -->
+        <!-- Posts -->
+        <div class="primaryItem md:col-start-1 col-span-2">
+            <div class="flex flex-col gap-[15px] rounded mb-[30px] sm:max-w-[80%] mx-auto md:mx-0">
+                <h1 class="text-2xl font-extrabold">/Principal/ - Fale sobre o que quiser.</h1>
+                <span class="">
+                    <span class="text-[#f4f615cc] font-['JetBrains_Mono'] font-extrabold">[!] いらっしゃいませ！</span> <span
+                        class="text-[#149414]">Respeite as regras desse lugar.</span>
+                </span>
+                <form action="{% url 'sendPost_Name' %}" class="flex flex-col gap-[5px]" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="title"
+                        class="w-full flex items-center bg-transparent justify-center rounded border border-[#111111] pt-[20px] pb-[20px] pl-[15px] pr-[15px]"
+                        placeholder="Título da sua mensagem.">
+                    <textarea name="contentPost"
+                        class="w-full bg-transparent border border-[#111111] items-center justify-center rounded p-[15px]"
+                        type="text" placeholder="No que você está pensando?"></textarea>
+                    <button type="submit"
+                        class="w-full pt-[20px] pb-[20px] pl-[15px] pr-[15px] bg-[#111111] rounded">OK</button>
+                </form>
+            </div>
+            <section id="comentaryContainer-{{ post.id }}"
+                class="bg-[#0D0D0D] w-fit rounded p-[20px] flex flex-col gap-[10px] mb-[10px]">
+                <ul class="flex items-center gap-[10px]">
+                    <li><span class="text-[14px] font-['JetBrains_Mono'] font-extrabold text-[#f4f615cc]">@admin</span>
+                    </li>
+                    <li><span class="text-xs font-['JetBrains_Mono']">22:09:43, 01 Nov 2026</span>
+                    </li>
+                </ul>
+                <div class="mb-4 flex flex-col gap-[10px]">
+                    <h2 class="text-base font-bold">Seja bem-vindo ao Trooth Forum!</h2>
+                    <p class="whitespace-pre-wrap text-sm font-['JetBrains_Mono'] text-left">Obrigado por acessar nosso espaço! Este fórum foi feito para você interagir com total liberdade: utilize a plataforma para debater ideias, desabafar sobre o seu dia ou compartilhar seus causos e histórias. Sinta-se em casa e deixe a sua contribuição abaixo.</p>
+                </div>
+            </section>
+            {% for post in posts %}
+            <section id="comentaryContainer-{{ post.id }}"
+                class="bg-[#0D0D0D] w-fit rounded p-[20px] flex flex-col gap-[10px] mb-[10px]">
+                <ul class="flex items-center gap-[10px]">
+                    <li><span class="text-[14px] font-['JetBrains_Mono'] font-extrabold">Anônimo</span>
+                    </li>
+                    <li><span class="text-xs font-['JetBrains_Mono']">{{ post.timePost|date:"H:i:s, d M Y" }}</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" onclick="toggleReplyForm('{{ post.id }}')"
+                            class="text-[13px] font-['JetBrains_Mono']">[responder]</a>
+                    </li>
+                </ul>
+                <div class="mb-4">
+                    <h2 class="text-base font-bold mb-[10px]">{{ post.title }}</h2>
+                    <p class="whitespace-pre-wrap text-sm font-['JetBrains_Mono'] text-left line-clamp-5 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;">{{post.message }}</p>
+                    <button
+                        onclick="this.previousElementSibling.style.webkitLineClamp='unset'; this.previousElementSibling.style.display='block'; this.style.display='none';"
+                        class="mt-2 text-sm text-[#A6A6A6] font-medium cursor-pointer">(Ler mais)
+                    </button>
+                </div>
+
+                <script>
+                    document.querySelectorAll("p.line-clamp-5").forEach(el => {
+                        const btn = el.nextElementSibling;
+                        if (el.scrollHeight <= el.clientHeight) {
+                            btn.style.display = 'none';
+                        }
+                    });
+                </script>
+            </section>
+
+            <!-- FORMULÁRIO DE RESPOSTA OCULTO -->
+            <div id="reply-form-wrapper-{{ post.id }}" class="hidden my-[10px]">
+                <form action="{% url 'sendReply_Name' post.id %}" class="w-auto flex flex-col gap-[5px]" method="POST">
+                    {% csrf_token %}
+                    <input type="text" class="w-full flex items-center justify-center rounded bg-[#111111] p-[15px]"
+                        placeholder="Título">
+                    <textarea name="contentPost"
+                        class="w-full border flex items-center justify-center border-[#3b3b3b] rounded bg-transparent p-[15px]"
+                        type="text" placeholder="No que você está pensando?"></textarea>
+                    <button type="submit" class="w-full p-[15px] bg-[#3b3b3b] rounded">Enviar</button>
+                </form>
+            </div>
+
+            <!-- RESPOSTAS JÁ CADASTRADAS (Usando related_name="Reposta") -->
+            {% for reply in post.Reposta.all %}
+            <section class="border border-[#0D0D0D] w-fit  rounded flex flex-col gap-[10px] pt-[20px] pb-[20px] pl-[30px] pr-[30px] mb-[10px]">
+                <ul class="flex items-end gap-[10px]">
+                    <li><span class="text-[14px] font-['JetBrains_Mono'] font-extrabold">Anônimo [respondeu]</span>
+                    </li>
+                    <li><span>|</span></li>
+                    <li>
+                        <span class="text-xs font-['JetBrains_Mono']">{{ reply.timePost|date:"H:i:s, d M Y"}}</span>
+                    </li>
+                </ul>
+                <div class="text-sm font-['JetBrains_Mono']">
+                    <div class="mb-4">
+                        <div class="mb-4">
+                            <span class="block text-sm font-['JetBrains_Mono'] whitespace-pre-wrap overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;">>>> {{ reply.message }}</span>
+                            <button
+                                onclick="this.previousElementSibling.style.webkitLineClamp='unset'; this.previousElementSibling.style.display='block'; this.style.display='none';"
+                                class="mt-2 text-sm text-[#A6A6A6] font-medium cursor-pointer"> (Ler mais)
+                            </button>
+                        </div>
+
+                        <script>
+                            document.querySelectorAll("span[style*='-webkit-line-clamp']").forEach(el => {
+                                const btn = el.nextElementSibling;
+                                if (el.scrollHeight <= el.clientHeight) {
+                                    btn.style.display = 'none';
+                                }
+                            });
+                        </script>
+                    </div>
+            </section>
+            {% endfor %}
+            {% endfor %}
+
+            <div class="flex gap-2 mt-5 mb-5 font-['JetBrains_Mono'] text-sm">
+                {% if posts.has_previous %}
+                <a href="?page=1" class="px-3 py-1 bg-[#111111] rounded text-[#A6A6A6] hover:text-white">&laquo;
+                    Primeira</a>
+                <a href="?page={{ posts.previous_page_number }}"
+                    class="px-3 py-1 bg-[#111111] rounded text-[#A6A6A6] hover:text-white">Anterior</a>
+                {% endif %}
+
+                {% for num in posts.paginator.page_range %}
+                {% if posts.number == num %}
+                <span class="px-3 py-1 bg-[#3b3b3b] rounded text-white font-bold">{{ num }}</span>
+                {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %} <a href="?page={{ num }}"
+                    class="px-3 py-1 bg-[#111111] rounded text-[#A6A6A6] hover:text-white">{{ num }}</a>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}"
+                        class="px-3 py-1 bg-[#111111] rounded text-[#A6A6A6] hover:text-white">Próxima</a>
+                    <a href="?page={{ posts.paginator.num_pages }}"
+                        class="px-3 py-1 bg-[#111111] rounded text-[#A6A6A6] hover:text-white">Última &raquo;</a>
+                    {% endif %}
+            </div>
+        </div>
+        <div class="secondaryItem flex flex-col gap-[15px] md:col-start-3">
+            <h1 class="text-xl font-extrabold">Informações adicionais</h1>
+            <section class="pt-[14px] pb-[14px] flex flex-col gap-[10px]">
+                <h2 class="font-extrabold text-sm">Vazio.</h2>
+            </section>
+        </div>
+    </div>
+
+    </div>
+    <footer class="p-[30px]">
+        <div class="w-full">
+            <section class="flex flex-col items-center gap-[15px] md:flex-row justify-between">
+                <span class="text-sm">&copy; Trooth Underground Forum<br>Desenvolvido por @sennatchz.</span>
+                <nav class="flex flex-col items-center gap-[20px] sm:flex-row">
+                    <a href="/admin" class="text-sm">[Administração]</a>
+                    <a href="/report" class="text-sm">[Denúncia anônima]</a>
+                    <a href="/top" class="text-sm">[Voltar ao topo]</a>
+                </nav>
+            </section>
+        </div>
+    </footer>
+</body>
+
+</html>

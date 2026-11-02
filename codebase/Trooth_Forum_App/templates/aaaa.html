@@ -1,0 +1,31 @@
+<div class="w-full flex flex-col gap-[5px]">
+    <h1 class="text-xl font-extrabold">Deus seja louvado.</h1>
+    <h3 class="font-['JetBrains_Mono'] text-sm font-extrabold text-green-400">
+        [!] こんにちは、Troothへようこそ！
+    </h3>
+    <p class="font-['JetBrains_Mono'] text-xs text-red-400">
+        [*] Só não publique nada ilegal.
+    </p>
+    <h1 class="text-xl font-extrabold">
+        [あなたのメッセージ] | Seja Bem-vindo(a)!
+    </h1>
+    <form action="{% url 'sendPost_Name' %}" class="max-w-[80%] flex flex-col gap-[5px]" method="POST">
+        {% csrf_token %}
+        <textarea name="contentPost"
+            class="w-full border flex items-center justify-center border-[#3b3b3b] rounded bg-transparent p-[15px]"
+            type="text" placeholder="No que você está pensando?"></textarea>
+        <button type="submit" class="w-full p-[15px] bg-[#3b3b3b] rounded">Enviar</button>
+    </form>
+</div>
+
+
+
+
+<div class="secoundaryItem flex flex-col gap-[15px]">
+            <h1 class="font-extrabold text-[25px]">Mural do Trooth</h1>
+            <section class="flex flex-col gap-[5px]">
+                <span class="bg-[#73020C] w-fit text-[12px] font-extrabold pt-[2.5px] pb-[2.5px] pr-[10px] pl-[10px] rounded">Admin</span>
+                <h2 class="title text-[16px] font-extrabold">Estamos precisando de um mascote.</h2>
+                <p class="desc text-[12px]">Poste a imagem de um meme, personagem ou celebridade e iniciaremos a votação.</p>
+            </section>
+        </div>

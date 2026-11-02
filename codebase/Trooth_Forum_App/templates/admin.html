@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: 'Merriweather', serif;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('{% static "bg.svg" %}');
+            background-color: #050505;
+            color: #A6A6A6;
+        }
+    </style>
+</head>
+<body class="bg-cover bg-center min-h-screen relative">
+    <div id="mainContainer">
+        <div id="loginContainer" class="pb-[30px] max-w-[500px] mx-auto flex flex-col gap-[10px]">
+            <header class="pt-[30px] pb-[30px] flex items-center align-center justify-between">
+                <a href="/" class="text-sm font-extrabold">Trooth Forum</a>
+                <a href="/" class="text-sm text-[#6861e2]">[Voltar para o fórum]</a>
+            </header>
+            <h1 class="text-xl font-extrabold">[!] 管理者キーを入力してください | Administrador</h1>
+            <form action="" class="flex flex-col gap-[5px]">
+                <input class="border border-[#3b3b3b] bg-transparent p-[10px]" type="password" placeholder="key 鍵。">
+                <button class="p-[15px] bg-[#3b3b3b]">Entrar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
