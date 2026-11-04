@@ -120,13 +120,13 @@
         <!-- Box -->
         <!-- Posts -->
         <div class="primaryItem md:col-start-1 col-span-2">
-            <!-- 
             <div class="flex flex-col gap-[15px] rounded mb-[30px] sm:max-w-[80%] mx-auto md:mx-0">
+                <!-- 
                 <h1 class="text-2xl font-extrabold">/Principal/ - Fale sobre o que quiser.</h1>
                 <span class="">
                     <span class="text-[#f4f615cc] font-['JetBrains_Mono'] font-extrabold">[!] いらっしゃいませ！</span> <span
                         class="text-[#149414]">Respeite as regras desse lugar.</span>
-                </span>
+                </span>Box -->
                 <form action="{% url 'sendPost_Name' %}" class="flex flex-col gap-[5px]" method="POST">
                     {% csrf_token %}
                     <input type="text" name="title"
@@ -139,8 +139,6 @@
                         class="w-full pt-[20px] pb-[20px] pl-[15px] pr-[15px] bg-[#111111] rounded">OK</button>
                 </form>
             </div>
-
-            Box -->
             <section id="comentaryContainer-{{ post.id }}"
                 class="bg-[#0D0D0D] w-fit rounded p-[20px] flex flex-col gap-[10px] mb-[10px]">
                 <ul class="flex items-center gap-[10px]">
